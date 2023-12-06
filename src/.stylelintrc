@@ -1,0 +1,12 @@
+{
+ "extends": ["stylelint-config-recommended-scss"],
+ "rules": {
+    "no-irregular-whitespace": true,
+    "length-zero-no-unit": true,
+    "indentation": 2,
+    "block-opening-brace-space-before": "always",
+    "block-closing-brace-newline-after": "always",
+    "declaration-colon-space-after": "always",
+    "declaration-block-trailing-semicolon": "always",
+    "shorthand-property-no-redundant-values": true}
+}

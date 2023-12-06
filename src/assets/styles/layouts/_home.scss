@@ -1,57 +1,247 @@
+
 * {
   box-sizing: border-box;
 }
 
-body {
+body {  
   display: flex;
   flex-direction: column;
-  height: 100vh;
   margin: 0;
-  padding: 2rem;
+  padding: 0;
+  container: container / inline-size;
   font-family: $font-family-sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  background-color: $uoc-bg;
-  color: $uoc-corporate;
+  font-size: large;
 }
 
-.uoc-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem;
-  border-radius: 2rem;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+main {
+  flex: 1;
 }
 
-.uoc-logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1.5rem;
-  max-width: 200px;
+.liga img {
+  max-width: 100%;
   height: auto;
+  margin-top: 10px;
+}
 
-  @media (min-width: $mqMinWidth) {
-    max-width: none;
+.img-container img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+header {
+  background-color: $c-gray2;
+  display: flex;
+  padding: 20px;
+  .logo {
+    img {
+      height: 40px;
+    }
   }
 }
 
-.uoc-title {
-  font-family: $font-family-serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: $uoc-corporate;
+nav {
+  margin-left: auto;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
 
-  @media (min-width: $mqMinWidth) {
-    font-size: 36px;
+    li {
+      display: flex;
+      height: 50px;
+      align-items: center;
+      a {
+        text-decoration: none;
+        color: $c-white;
+        padding: 10px;
+        &:hover {
+          background-color: $c-gray1;
+        }
+      }
+    }
   }
 }
 
-.uoc-footer {
-  margin-top: 1.5rem;
-  font-size: 0.75rem;
+.portada {
+  display: grid;
+  overflow: auto;
+  height: calc( 100vh - 190px );
+  .grid-item_a, .grid-item_b, .grid-item_c {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @supports (display: grid) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 1fr;
+    grid-template-areas: "a a" "b c" ;
+                          
+    .grid-item_a {
+      grid-area: a;
+      justify-content: space-around;
+      img {
+        width: $mqMinWidth;
+      }
+    }
+    .grid-item_b {
+      grid-area: b;
+    }
+    .grid-item_c { 
+      grid-area: c;
+      justify-content: space-around;
+      font-size: xx-large;
+      background-color: $c-gray1;
+      color: $c-green;
+    }
+  }
+  @supports not (display: grid) {
+    display: block;
+    .grid-item_a, .grid-item_b, .grid-item_c {
+      width: 100%;
+    }
+  }
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  max-width: 1500px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.fila {
+  display: flex;
+}
+
+.columna {
   text-align: center;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  margin: 20px 10px;
+  max-height: 800px;
+
+  div {
+    max-width: 100%; 
+    margin: 10px auto;  
+  }
+  h1 {
+    margin: 10px 0;
+  }
+}
+
+.liga {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.liga header {
+  text-align: center;
+}
+
+.liga h1 {
+  color: #333;
+}
+
+.liga section {
+  margin-top: 20px;
+}
+
+.liga p {
+  line-height: 1.5;
+  color: #555;
+}
+
+body > footer {
+  display: flex;
+  background-color: $c-gray2;
+  color: #fff;
+  height: 100px;
+  align-items: center;
+  padding: 20px;
+}
+
+.liga footer {
+  margin-top: 20px;
+  text-align: center;
+  color: #777;
+}
+
+.liga :is(section):where(:has(p, img)) {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px hbw(0 0% 100% / 0.1);
+}
+
+
+.img-container:hover img {
+  transform: scale(1.5);
+}
+
+.img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $c-greent;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.img-container:hover .img-overlay {
+  opacity: 1;
+}
+
+.img-overlay i {
+  font-size: 2rem;
+}
+
+@container container (max-width: 700px) {
+  header, body, footer {
+    display: block;
+  }
+  nav {
+    left: 0;
+    ul {
+      display: block;
+    }
+  }
+  .portada {
+    height: calc( 100vh - 330px );
+    .grid-item_a, .grid-item_b, .grid-item_c {
+      padding: 10px;
+      img {
+        width: 500px;
+      }
+    }
+  }
+  .contenedor {
+    height: calc( 100vh - 330px );
+  }
+  .galeria {
+    height: calc( 100vh - 330px );
+    overflow: auto;
+  }
+  .liga {
+    height: calc( 100vh - 330px );
+    overflow: auto;
+  }
 }
